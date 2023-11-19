@@ -1,4 +1,4 @@
-export interface CompanyInterface {
+export interface CatalogInterface {
 	id: number,
     disk_name: string,
     date_of_batch_arriving: string,

@@ -3,22 +3,22 @@
     gap: 20px;
 }
 
-.addCatalog,
-.deleteCatalog,
-.updateCatalog {
+.addCatalogToCompanies,
+.deleteCatalogToCompanies,
+.updateCatalogToCompanies {
     display: grid;
     gap: 5px;
 }
 
-.addCatalog {
+.addCatalogToCompanies {
     grid-template-columns: repeat(4, auto);
 }
 
-.deleteCatalog {
+.deleteCatalogToCompanies {
     grid-template-columns: repeat(2, auto);
 }
 
-.updateCatalog {
+.updateCatalogToCompanies {
     grid-template-columns: repeat(3, auto);
 }
 

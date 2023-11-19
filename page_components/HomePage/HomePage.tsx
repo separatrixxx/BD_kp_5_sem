@@ -6,21 +6,34 @@ import { CatalogToCompaniesTable } from 'components/CatalogToCompaniesTable/Cata
 import { useEffect, useState } from 'react';
 import { ContactsInterface } from 'interfaces/contacts.interface';
 import { getContacts } from 'helpers/contacts.helper';
+import { CompanyInterface } from 'interfaces/company.interface';
+import { getCompanies } from 'helpers/companies.helper';
+import { CatalogToCompaiesInterface } from 'interfaces/catalog_to_companies.interface';
+import { getCatalogToCompanies } from 'helpers/catalog_to_companies.helper';
+import { CatalogInterface } from 'interfaces/catalog.interface';
+import { getCatalog } from 'helpers/catalog.helper';
 
 
 export const HomePage = (): JSX.Element => {
     const [contacts, setContacts] = useState<ContactsInterface[]>([]);
+    const [companies, setCompanies] = useState<CompanyInterface[]>([]);
+    const [catalog, setCatalog] = useState<CatalogInterface[]>([]);
+    const [catalogToCompanies, setCatalogToCompanies] = useState<CatalogToCompaiesInterface[]>([]);
 
     useEffect(() => {
         getContacts(setContacts);
+        getCompanies(setCompanies);
+        getCatalog(setCatalog);
+        getCatalogToCompanies(setCatalogToCompanies);
     }, []);
 
     return (
         <div className={styles.wrapper}>
             <CompanyContactsTable contacts={contacts} updateTable={() => getContacts(setContacts)} />
-            <CompaniesTable />
-            <CatalogTable />
-            <CatalogToCompaniesTable />
+            <CompaniesTable companies={companies} updateTable={() => getCompanies(setCompanies)} />
+            <CatalogTable catalog={catalog} updateTable={() => getCatalog(setCatalog)} />
+            <CatalogToCompaniesTable catalogToCompanies={catalogToCompanies}
+                updateTable={() => getCatalogToCompanies(setCatalogToCompanies)} />
         </div>
     );
 };

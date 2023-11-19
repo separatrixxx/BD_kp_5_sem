@@ -1,0 +1,61 @@
+.wrapper {
+    display: grid;
+    gap: 20px;
+}
+
+.addCompanies,
+.deleteCompanies,
+.updateCompanies {
+    display: grid;
+    gap: 5px;
+}
+
+.addCompanies {
+    grid-template-columns: repeat(4, auto);
+}
+
+.deleteCompanies {
+    grid-template-columns: repeat(2, auto);
+}
+
+.updateCompanies {
+    grid-template-columns: repeat(3, auto);
+}
+
+.button {
+    cursor: pointer;
+    background: var(--primary);
+    border: none;
+    color: var(--white);
+    padding: 5px 0;
+    border-radius: 5px;
+    transition-duration: 300ms;
+}
+
+.button:active {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+    filter: brightness(0.9);
+}
+
+.errorDiv {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+    background: var(--error) !important;
+    border-radius: 10px;
+}
+
+.errorDiv > h3 {
+    color: var(--white);
+}
+
+@media (min-width: 1024px) {
+	.button:hover {
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+		filter: brightness(0.9);
+	}
+}
