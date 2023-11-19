@@ -46,7 +46,7 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                 <Input text='id' value={id1} onChange={(e) => setId1(e.target.value)} />
                 <Input text='email' value={email} onChange={(e) => setEmail(e.target.value)} />
                 <Input text='address' value={address} onChange={(e) => setAddress(e.target.value)} />
-                <Input text='working_hours' value={workingHours} onChange={(e) => setWorkingHours(e.target.value)} />
+                <Input text='workingHours' value={workingHours} onChange={(e) => setWorkingHours(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
                 addContacts(id1, email, address, workingHours, setError);
