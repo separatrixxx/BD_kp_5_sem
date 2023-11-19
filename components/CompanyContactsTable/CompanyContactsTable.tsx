@@ -11,12 +11,11 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
     const [address, setAddress] = useState<string>('');
     const [workingHours, setWorkingHours] = useState<string>('');
 
-    const [columnName1, setColumnName1] = useState<string>('');
-    const [value, setValue] = useState<string>('');
+    const [id2, setId2] = useState<string>('');
 
     const [columnName2, setColumnName2] = useState<string>('');
     const [newValue, setNewValue] = useState<string>('');
-    const [id2, setId2] = useState<string>('');
+    const [id3, setId3] = useState<string>('');
 
     const [error, setError] = useState<string>('');
 
@@ -55,11 +54,10 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                 Добавить контакты
             </button>
             <div className={styles.deleteContacts}>
-                <Input text='column_name' value={columnName1} onChange={(e) => setColumnName1(e.target.value)} />
-                <Input text='value' value={value} onChange={(e) => setValue(e.target.value)} />
+                <Input text='id' value={id2} onChange={(e) => setId2(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
-                deleteContacts(columnName1, value, setError);
+                deleteContacts(id2, setError);
                 updateTable;
             }}>
                 Удалить контакты
@@ -67,10 +65,10 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
             <div className={styles.updateContacts}>
                 <Input text='column_name' value={columnName2} onChange={(e) => setColumnName2(e.target.value)} />
                 <Input text='new_value' value={newValue} onChange={(e) => setNewValue(e.target.value)} />
-                <Input text='id' value={id2} onChange={(e) => setId2(e.target.value)} />
+                <Input text='id' value={id3} onChange={(e) => setId3(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
-                updateContacts(columnName2, newValue, id2, setError);
+                updateContacts(columnName2, newValue, id3, setError);
                 updateTable;
             }}>
                 Обновить контакты

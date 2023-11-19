@@ -24,11 +24,8 @@ export async function addContacts(id: string, email: string, address: string, wo
         });
 };
 
-export async function deleteContacts(columnName: string, value: string, setError: (e: any) => void) {
-    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=company_contacts', {
-        columnName: columnName,
-        value: value,
-    })
+export async function deleteContacts(id: string, setError: (e: any) => void) {
+    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=company_contacts?deleteId='+ id)
         .then(function () {
             console.log('Контакты удалены');
         })
