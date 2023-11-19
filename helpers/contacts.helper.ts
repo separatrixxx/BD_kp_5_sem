@@ -13,7 +13,7 @@ export async function addContacts(id: string, email: string, address: string, wo
         id: id,
         email: email,
         address: address,
-        working_hours: working_hours,
+        workingHours: working_hours,
     })
         .then(function () {
             console.log('Контакты добавлены');
