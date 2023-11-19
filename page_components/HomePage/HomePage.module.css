@@ -1,0 +1,8 @@
+.wrapper {
+	display: grid;
+
+	width: fit-content;
+	padding: 30px;
+	justify-items: left;
+	gap: 50px;
+}

@@ -1,0 +1,23 @@
+.wrapper {
+    display: grid;
+    gap: 20px;
+}
+
+.addContacts {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+}
+
+.deleteContacts {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+}
+
+.updateContacts {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+}
+
+.button {
+    cursor: pointer;
+}
