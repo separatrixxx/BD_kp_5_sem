@@ -18,6 +18,8 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
     const [newValue, setNewValue] = useState<string>('');
     const [id2, setId2] = useState<string>('');
 
+    const [error, setError] = useState<string>('');
+
     return (
         <div className={styles.wrapper}>
             <table>
@@ -47,7 +49,7 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                 <Input text='working_hours' value={workingHours} onChange={(e) => setWorkingHours(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
-                addContacts(id1, email, address, workingHours);
+                addContacts(id1, email, address, workingHours, setError);
                 updateTable;
             }}>
                 Добавить контакты
@@ -57,7 +59,7 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                 <Input text='value' value={value} onChange={(e) => setValue(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
-                deleteContacts(columnName1, value);
+                deleteContacts(columnName1, value, setError);
                 updateTable;
             }}>
                 Удалить контакты
@@ -68,11 +70,19 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                 <Input text='id' value={id2} onChange={(e) => setId2(e.target.value)} />
             </div>
             <button className={styles.button} onClick={() => {
-                updateContacts(columnName2, newValue, id2);
+                updateContacts(columnName2, newValue, id2, setError);
                 updateTable;
             }}>
                 Обновить контакты
             </button>
+            {
+                error ?
+                    <div className={styles.errorDiv}>
+                        <h3>{error}</h3>
+                    </div>
+                :
+                    <></>
+            }
         </div>
     );
 };

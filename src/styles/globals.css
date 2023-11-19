@@ -64,5 +64,7 @@ a {
 	--primary: #21C1FF;
 	--white: white;
 	--dark: #10122A;
+	--error: #FF1500;
+	--light: #DBDBDB;
 	--font-family: 'Roboto', sans-serif;
 }
