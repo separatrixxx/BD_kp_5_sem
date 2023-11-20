@@ -5,7 +5,7 @@ import { Input } from 'components/Input/Input';
 import { addContacts, deleteContacts, updateContacts } from 'helpers/contacts.helper';
 
 
-export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsTableProps): JSX.Element => {
+export const CompanyContactsTable = ({ contacts }: CompanyContactsTableProps): JSX.Element => {
     const [id1, setId1] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [address, setAddress] = useState<string>('');
@@ -36,7 +36,7 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
                             <td>{c.id}</td>
                             <td>{c.email}</td>
                             <td>{c.address}</td>
-                            <td>{c.working_hours}</td>
+                            <td>{c.workingHours}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -49,7 +49,6 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
             </div>
             <button className={styles.button} onClick={() => {
                 addContacts(id1, email, address, workingHours, setError);
-                updateTable;
             }}>
                 Добавить контакты
             </button>
@@ -58,7 +57,6 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
             </div>
             <button className={styles.button} onClick={() => {
                 deleteContacts(id2, setError);
-                updateTable;
             }}>
                 Удалить контакты
             </button>
@@ -69,7 +67,6 @@ export const CompanyContactsTable = ({ contacts, updateTable }: CompanyContactsT
             </div>
             <button className={styles.button} onClick={() => {
                 updateContacts(columnName2, newValue, id3, setError);
-                updateTable;
             }}>
                 Обновить контакты
             </button>

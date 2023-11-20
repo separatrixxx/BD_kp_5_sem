@@ -5,7 +5,7 @@ import { Input } from 'components/Input/Input';
 import { addCatalog, deleteCatalog, updateCatalog } from 'helpers/catalog.helper';
 
 
-export const CatalogTable = ({ catalog, updateTable }: CatalogTableProps): JSX.Element => {
+export const CatalogTable = ({ catalog }: CatalogTableProps): JSX.Element => {
     const [id1, setId1] = useState<string>('');
     const [diskName, setDiskName] = useState<string>('');
     const [dateOfBatchArriving, setDateOfBatchArriving] = useState<string>('');
@@ -40,12 +40,12 @@ export const CatalogTable = ({ catalog, updateTable }: CatalogTableProps): JSX.E
                     {catalog.map(c => (
                         <tr key={c.id}>
                             <td>{c.id}</td>
-                            <td>{c.disk_name}</td>
-                            <td>{c.date_of_batch_arriving}</td>
-                            <td>{c.date_of_batch_write_off}</td>
-                            <td>{c.current_disk_quantity}</td>
-                            <td>{c.disk_price}</td>
-                            <td>{c.disk_rating}</td>
+                            <td>{c.diskName}</td>
+                            <td>{c.dateOfBatchArriving}</td>
+                            <td>{c.dateOfBatchWriteOff}</td>
+                            <td>{c.currentDiskQuantity}</td>
+                            <td>{c.diskName}</td>
+                            <td>{c.diskRating}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -62,7 +62,6 @@ export const CatalogTable = ({ catalog, updateTable }: CatalogTableProps): JSX.E
             <button className={styles.button} onClick={() => {
                 addCatalog(id1, diskName, dateOfBatchArriving, dateOfBatchWriteOff, currentDiskQuantity, diskPrice,
                     diskRating, setError);
-                updateTable;
             }}>
                 Добавить каталог
             </button>
@@ -71,7 +70,6 @@ export const CatalogTable = ({ catalog, updateTable }: CatalogTableProps): JSX.E
             </div>
             <button className={styles.button} onClick={() => {
                 deleteCatalog(id2, setError);
-                updateTable;
             }}>
                 Удалить каталог
             </button>
@@ -82,7 +80,6 @@ export const CatalogTable = ({ catalog, updateTable }: CatalogTableProps): JSX.E
             </div>
             <button className={styles.button} onClick={() => {
                 updateCatalog(columnName2, newValue, id3, setError);
-                updateTable;
             }}>
                 Обновить каталог
             </button>

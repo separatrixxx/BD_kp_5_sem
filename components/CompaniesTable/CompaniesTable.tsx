@@ -5,7 +5,7 @@ import { addCompany, deleteCompany, updateCompany } from 'helpers/companies.help
 import { Input } from 'components/Input/Input';
 
 
-export const CompaniesTable = ({ companies, updateTable }: CompaniesTableProps): JSX.Element => {
+export const CompaniesTable = ({ companies }: CompaniesTableProps): JSX.Element => {
     const [id1, setId1] = useState<string>('');
     const [companyName, setCompanyName] = useState<string>('');
     const [disruptedDelievers, setDisruptedDelievers] = useState<string>('');
@@ -42,13 +42,13 @@ export const CompaniesTable = ({ companies, updateTable }: CompaniesTableProps):
                     {companies.map(c => (
                         <tr key={c.id}>
                             <td>{c.id}</td>
-                            <td>{c.company_name}</td>
-                            <td>{c.disrupted_delievers}</td>
-                            <td>{c.phone_number}</td>
-                            <td>{c.agreement_price}</td>
-                            <td>{c.date_of_signing}</td>
-                            <td>{c.date_of_termination}</td>
-                            <td>{c.contact_id}</td>
+                            <td>{c.companyName}</td>
+                            <td>{c.disruptedDelievers}</td>
+                            <td>{c.phoneNumber}</td>
+                            <td>{c.agreementPrice}</td>
+                            <td>{c.dateOfSigning}</td>
+                            <td>{c.dateOfTermination}</td>
+                            <td>{c.contactId}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -66,7 +66,6 @@ export const CompaniesTable = ({ companies, updateTable }: CompaniesTableProps):
             <button className={styles.button} onClick={() => {
                 addCompany(id1, companyName, disruptedDelievers, phoneNumber, agreementPrice, dateOfSigning,
                     dateOfTermination, contactId, setError);
-                updateTable;
             }}>
                 Добавить компанию
             </button>
@@ -75,7 +74,6 @@ export const CompaniesTable = ({ companies, updateTable }: CompaniesTableProps):
             </div>
             <button className={styles.button} onClick={() => {
                 deleteCompany(id2, setError);
-                updateTable;
             }}>
                 Удалить компанию
             </button>
@@ -86,7 +84,6 @@ export const CompaniesTable = ({ companies, updateTable }: CompaniesTableProps):
             </div>
             <button className={styles.button} onClick={() => {
                 updateCompany(columnName2, newValue, id3, setError);
-                updateTable;
             }}>
                 Обновить компанию
             </button>

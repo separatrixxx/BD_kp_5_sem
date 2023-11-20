@@ -5,7 +5,7 @@ import { Input } from 'components/Input/Input';
 import { addCatalogToCompanies, deleteCatalogToCompanies, updateCatalogToCompanies } from 'helpers/catalog_to_companies.helper';
 
 
-export const CatalogToCompaniesTable = ({ catalogToCompanies, updateTable }: CatalogToCompaniesTableProps): JSX.Element => {
+export const CatalogToCompaniesTable = ({ catalogToCompanies }: CatalogToCompaniesTableProps): JSX.Element => {
     const [companyId, setCompanyId] = useState<string>('');
     const [diskId, setDiskId] = useState<string>('');
 
@@ -28,9 +28,9 @@ export const CatalogToCompaniesTable = ({ catalogToCompanies, updateTable }: Cat
                 </thead>
                 <tbody>
                     {catalogToCompanies.map(c => (
-                        <tr key={c.company_id}>
-                            <td>{c.company_id}</td>
-                            <td>{c.disk_id}</td>
+                        <tr key={c.companyId + c.diskId}>
+                            <td>{c.companyId}</td>
+                            <td>{c.diskId}</td>
                         </tr>
                     ))}
                 </tbody>
@@ -41,7 +41,6 @@ export const CatalogToCompaniesTable = ({ catalogToCompanies, updateTable }: Cat
             </div>
             <button className={styles.button} onClick={() => {
                 addCatalogToCompanies(companyId, diskId, setError);
-                updateTable;
             }}>
                 Добавить контакты
             </button>
@@ -50,7 +49,6 @@ export const CatalogToCompaniesTable = ({ catalogToCompanies, updateTable }: Cat
             </div>
             <button className={styles.button} onClick={() => {
                 deleteCatalogToCompanies(id2, setError);
-                updateTable;
             }}>
                 Удалить контакты
             </button>
@@ -61,7 +59,6 @@ export const CatalogToCompaniesTable = ({ catalogToCompanies, updateTable }: Cat
             </div>
             <button className={styles.button} onClick={() => {
                 updateCatalogToCompanies(columnName2, newValue, id3, setError);
-                updateTable;
             }}>
                 Обновить контакты
             </button>

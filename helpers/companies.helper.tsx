@@ -11,16 +11,34 @@ export async function getCompanies(setCompanies: (e: any) => void) {
 
 export async function addCompany(id: string, companyName: string, disruptedDelievers: string, phoneNumber: string,
     agreementPrice: string, dateOfSigning: string, dateOfTermination: string, contactId: string, setError: (e: any) => void) {
-    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disk_companies', {
-        id: id,
-        companyName: companyName,
-        disruptedDelievers: disruptedDelievers,
-        phoneNumber: phoneNumber,
-        agreementPrice: agreementPrice,
-        dateOfSigning: dateOfSigning,
-        dateOfTermination: dateOfTermination,
-        contactId: contactId,
-    })
+    let body: CompanyInterface = {};
+
+    if (id) {
+        body.id = +id;
+    }
+    if (companyName) {
+        body.companyName = companyName;
+    }
+    if (disruptedDelievers) {
+        body.disruptedDelievers = +disruptedDelievers;
+    }
+    if (phoneNumber) {
+        body.phoneNumber = phoneNumber as string;
+    }
+    if (agreementPrice) {
+        body.agreementPrice = +agreementPrice;
+    }
+    if (dateOfSigning) {
+        body.dateOfSigning = dateOfSigning;
+    }
+    if (dateOfTermination) {
+        body.dateOfTermination = dateOfTermination;
+    }
+    if (contactId) {
+        body.contactId = +contactId;
+    }
+
+    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disk_companies', body)
         .then(function () {
             console.log('Компания добавлена');
 
@@ -29,16 +47,13 @@ export async function addCompany(id: string, companyName: string, disruptedDelie
         .catch(function (error) {
             console.log("Ошибка при добавлении компании: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };
 
 export async function deleteCompany(id: string, setError: (e: any) => void) {
-    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disk_companies?deleteId='+ id)
+    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disk_companies&deleteId='+ id)
         .then(function () {
             console.log('Компания удалена');
 
@@ -47,11 +62,8 @@ export async function deleteCompany(id: string, setError: (e: any) => void) {
         .catch(function (error) {
             console.log("Ошибка при удалении компании: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };
 
@@ -69,12 +81,7 @@ export async function updateCompany(columnName: string, newValue: string, id: st
         .catch(function (error) {
             console.log("Ошибка при обновлении компании: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else if (error.request) {
-                setError(error.request);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };

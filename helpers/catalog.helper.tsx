@@ -11,15 +11,31 @@ export async function getCatalog(setCatalog: (e: any) => void) {
 
 export async function addCatalog(id: string, diskName: string, dateOfBatchArriving: string, dateOfBatchWriteOff: string,
     currentDiskQuantity: string, diskPrice: string, diskRating: string, setError: (e: any) => void) {
-    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disk_catalog', {
-        id: id,
-        diskName: diskName,
-        dateOfBatchArriving: dateOfBatchArriving,
-        dateOfBatchWriteOff: dateOfBatchWriteOff,
-        currentDiskQuantity: currentDiskQuantity,
-        diskPrice: diskPrice,
-        diskRating: diskRating,
-    })
+    let body: CatalogInterface = {};
+
+    if (id) {
+        body.id = +id;
+    }
+    if (diskName) {
+        body.diskName = diskName;
+    }
+    if (dateOfBatchArriving) {
+        body.dateOfBatchArriving = dateOfBatchArriving;
+    }
+    if (dateOfBatchWriteOff) {
+        body.dateOfBatchWriteOff = dateOfBatchWriteOff;
+    }
+    if (currentDiskQuantity) {
+        body.currentDiskQuantity = +currentDiskQuantity;
+    }
+    if (diskPrice) {
+        body.diskPrice = +diskPrice;
+    }
+    if (diskRating) {
+        body.diskRating = +diskRating;
+    }
+
+    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disk_catalog', body)
         .then(function () {
             console.log('Каталог добавлен');
 
@@ -28,16 +44,13 @@ export async function addCatalog(id: string, diskName: string, dateOfBatchArrivi
         .catch(function (error) {
             console.log("Ошибка при добавлении каталога: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };
 
 export async function deleteCatalog(id: string, setError: (e: any) => void) {
-    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disk_catalog?deleteId='+ id)
+    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disk_catalog&deleteId='+ id)
         .then(function () {
             console.log('Каталог удалён');
 
@@ -46,11 +59,8 @@ export async function deleteCatalog(id: string, setError: (e: any) => void) {
         .catch(function (error) {
             console.log("Ошибка при удалении каталога: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };
 
@@ -68,10 +78,7 @@ export async function updateCatalog(columnName: string, newValue: string, id: st
         .catch(function (error) {
             console.log("Ошибка при обновлении каталога: " + error);
             
-            if (error.response) {
-                setError(error.response.errorMessage);
-            } else {
-                setError(error.message);
-            }
+            setError(error.response.data.errorCode === 'VALIDATION_ERROR' ? 'Ошибка валидации: ' + error.response.data.errorMessage 
+                : 'Ошибка Postgresql: ' + error.response.data.errorMessage);
         });
 };

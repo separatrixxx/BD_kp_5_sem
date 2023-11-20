@@ -4,5 +4,4 @@ import { CatalogToCompaiesInterface } from "interfaces/catalog_to_companies.inte
 
 export interface CatalogToCompaniesTableProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
 	catalogToCompanies: CatalogToCompaiesInterface[],
-	updateTable: (e: any) => void,
 }

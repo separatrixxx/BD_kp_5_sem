@@ -29,11 +29,10 @@ export const HomePage = (): JSX.Element => {
 
     return (
         <div className={styles.wrapper}>
-            <CompanyContactsTable contacts={contacts} updateTable={() => getContacts(setContacts)} />
-            <CompaniesTable companies={companies} updateTable={() => getCompanies(setCompanies)} />
-            <CatalogTable catalog={catalog} updateTable={() => getCatalog(setCatalog)} />
-            <CatalogToCompaniesTable catalogToCompanies={catalogToCompanies}
-                updateTable={() => getCatalogToCompanies(setCatalogToCompanies)} />
+            <CompanyContactsTable contacts={contacts} />
+            <CompaniesTable companies={companies} />
+            <CatalogTable catalog={catalog} />
+            <CatalogToCompaniesTable catalogToCompanies={catalogToCompanies} />
         </div>
     );
 };
