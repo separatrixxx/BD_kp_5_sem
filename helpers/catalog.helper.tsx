@@ -4,14 +4,14 @@ import { CatalogInterface } from "interfaces/catalog.interface";
 
 export async function getCatalog(setCatalog: (e: any) => void) {
     const { data: catalog }: AxiosResponse<CatalogInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
-        '/db/viewDb?dbName=film_disks_catalog');
+        '/db/viewDb?dbName=film_disk_catalog');
 
         setCatalog(catalog);
 };
 
 export async function addCatalog(id: string, diskName: string, dateOfBatchArriving: string, dateOfBatchWriteOff: string,
     currentDiskQuantity: string, diskPrice: string, diskRating: string, setError: (e: any) => void) {
-    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disks_catalog', {
+    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/addDb?dbName=film_disk_catalog', {
         id: id,
         diskName: diskName,
         dateOfBatchArriving: dateOfBatchArriving,
@@ -37,7 +37,7 @@ export async function addCatalog(id: string, diskName: string, dateOfBatchArrivi
 };
 
 export async function deleteCatalog(id: string, setError: (e: any) => void) {
-    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disks_catalog?deleteId='+ id)
+    await axios.delete(process.env.NEXT_PUBLIC_DOMAIN + '/db/deleteDb?dbName=film_disk_catalog?deleteId='+ id)
         .then(function () {
             console.log('Каталог удалён');
 
@@ -55,7 +55,7 @@ export async function deleteCatalog(id: string, setError: (e: any) => void) {
 };
 
 export async function updateCatalog(columnName: string, newValue: string, id: string, setError: (e: any) => void) {
-    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/updateDb?dbName=film_disks_catalog', {
+    await axios.post(process.env.NEXT_PUBLIC_DOMAIN + '/db/updateDb?dbName=film_disk_catalog', {
         columnName: columnName,
         newValue: "'" + newValue + "'",
         id: id,
